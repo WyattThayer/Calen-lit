@@ -1,7 +1,7 @@
 import express from "express";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
-import  { User, Event, db } from "./Database/model.js";
+import { handlerFunctions } from "./Controllers/controller";
 
 const app = express();
 
@@ -11,14 +11,19 @@ app.use(express.static("public"));
 app.use(express.json());
 
 //Routes
-const router = express.Router();
+app.get("/user", handlerFunctions.getUsers);
+app.get("/user/:id", handlerFunctions.getUser);
+app.delete("/user/:id", handlerFunctions.deleteUser);
+app.put("/user/:id", handlerFunctions.updateUser);
+app.post("/user", handlerFunctions.createUser);
 
-// Home page route.
-router.get("/helloworld", function (req, res) {
-  res.send({ mydata: "thing" });
-});
+app.get("/event", handlerFunctions.getEvents);
+app.get("/event/:id", handlerFunctions.getEvent);
+app.delete("/event/:id", handlerFunctions.deleteEvent);
+app.put("/event/:id", handlerFunctions.updateEvent);
+app.post("/event", handlerFunctions.createEvent);
 
-app.use(router);
+
 
 //opening the server
 ViteExpress.listen(app, 6969, () =>
