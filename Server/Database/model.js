@@ -86,8 +86,6 @@ Event.init(
 );
 
 User.hasMany(Event, { foreignKey: "userId" });
-Event.belongsTo(User, { foreignKey: "userId" });
-
-await db.sync({ force: true });
+Event.belongsTo(User, { foreignKey: "userId", allowNull: false });
 
 export { User, Event, db };

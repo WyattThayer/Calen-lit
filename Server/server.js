@@ -1,7 +1,7 @@
 import express from "express";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
-import { handlerFunctions } from "./Controllers/controller";
+import { handlerFunctions } from "./Controllers/controller.js";
 
 const app = express();
 

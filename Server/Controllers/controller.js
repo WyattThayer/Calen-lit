@@ -24,15 +24,13 @@ export const handlerFunctions = {
   },
 
   getEvents: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
-
-    const newEvent = await Event.findAll({});
+    const allEvents = await Event.findAll();
+    res.json(allEvents);
   },
 
   getEvent: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
-
-    const newEvent = await Event.findOne({});
+    const event = await Event.findByPk(req.params.id);
+    res.json(event);
   },
 
   //* USERS
@@ -55,13 +53,12 @@ export const handlerFunctions = {
   },
 
   getUsers: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
-
-    const newUser = await User.createUser({});
+    const allUsers = await User.findAll();
+    res.json(allUsers);
   },
 
   getUser: async (req, res) => {
-    const user = await User.findOne({ id: req.params.id });
+    const user = await User.findByPk(req.params.id);
     res.json(user);
   },
 };
