@@ -1,0 +1,1 @@
+const {User, Event, db} = await import('./model.js')

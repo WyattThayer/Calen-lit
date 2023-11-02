@@ -1,4 +1,4 @@
-import connectToDB from "./db.js";
+import connectToDB from "./connectdb.js";
 import util from "util";
 import { DataTypes, Model } from "sequelize";
 
@@ -15,7 +15,7 @@ User.init(
     userId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: tr,
+      primaryKey: true,
     },
     username: {
       type: DataTypes.STRING,
