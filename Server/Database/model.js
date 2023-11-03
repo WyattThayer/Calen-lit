@@ -1,6 +1,7 @@
 import connectToDB from "./connectdb.js";
 import util from "util";
 import { DataTypes, Model } from "sequelize";
+import bcryptjs from "bcryptjs";
 
 const db = await connectToDB("postgresql:///calendar");
 
@@ -26,6 +27,45 @@ User.init(
     },
   },
   {
+    hooks: {
+      beforeUpdate: async (user, options) => {
+        if (user.password) {
+          const hashedPassword = await bcryptjs.hash(user.password, 12);
+          user.password = hashedPassword;
+        }
+      },
+      beforeCreate: async (user, options) => {
+        const hashedPassword = await bcryptjs.hash(user.password, 12);
+        user.password = hashedPassword;
+      },
+      beforeBulkCreate: async (users, options) => {
+        for (let user of users) {
+          const hashedPassword = await bcryptjs.hash(user.password, 12);
+          user.password = hashedPassword;
+        }
+      },
+      beforeBulkUpdate: async (users, options) => {
+        for (let user of users) {
+          if (user.password) {
+            const hashedPassword = await bcryptjs.hash(user.password, 12);
+            user.password = hashedPassword;
+          }
+        }
+      },
+    },
+    defaultScope: {
+      attributes: {
+        exclude: ["password"],
+      },
+      order: [["id", "DESC"]],
+    },
+    scopes: {
+      withPassword: {
+        attributes: {
+          include: ["password"],
+        },
+      },
+    },
     modelName: "user",
     sequelize: db,
   }

@@ -6,22 +6,22 @@ await db.sync({ force: true });
 let users = [];
 users.push({
   username: "lolcatk1",
-  password: bcryptjs.hashSync("lolcatk"),
+  password: "lolcatk",
 });
 
 users.push({
   username: "lolcatk2",
-  password: bcryptjs.hashSync("lolcatk"),
+  password: "lolcatk",
 });
 
 users.push({
   username: "lolcatk3",
-  password: bcryptjs.hashSync("lolcatk"),
+  password: "lolcatk",
 });
 
 users.push({
   username: "lolcatk4",
-  password: bcryptjs.hashSync("lolcatk"),
+  password: "lolcatk",
 });
 
 await User.bulkCreate(users).catch(console.error);
@@ -64,7 +64,7 @@ events.push({
 });
 
 events.push({
-  desc: "Valentines Orgy",
+  desc: "Valentines party",
   tag: "xxx",
   time: new Date("02/14/2024 7:00:00").toLocaleTimeString(),
   date: new Date("02/14/2024"),

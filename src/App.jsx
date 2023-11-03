@@ -1,11 +1,11 @@
 import { useState } from "react";
+import CalendarView from "./components/CalendarView.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>It's my luck day</div>
+      <CalendarView />
     </>
   );
 }
