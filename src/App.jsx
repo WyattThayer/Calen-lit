@@ -1,11 +1,12 @@
 import { useState } from "react";
 import CalendarView from "./components/CalendarView.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 
 function App() {
   return (
     <>
-      <CalendarView />
+      <Outlet />
     </>
   );
 }
