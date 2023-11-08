@@ -1,11 +1,21 @@
+
 import { User, Event, db } from "../Database/model.js";
+
+
 
 export const handlerFunctions = {
   //* EVENTS
   createEvent: async (req, res) => {
     const { desc, tag, food, costume, present } = req.body;
 
-    const newEvent = await User.createEvent({});
+    const newEvent = await event.create({
+        desc:desc,
+        tag:tag,
+        food:food,
+        costume:costume,
+        present:present
+    });
+    res.send({newEvent})
   },
 
   deleteEvent: async (req, res) => {
@@ -49,9 +59,14 @@ export const handlerFunctions = {
 
   //* USERS
   createUser: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
+   const { userName, password} = req.body
 
-    const newUser = await User.createUser({});
+    const newUser = await User.create({
+        username:userName,
+        password:password
+    });
+    console.log(newUser)
+    res.send({userId:newUser.id})
   },
 
   deleteUser: async (req, res) => {

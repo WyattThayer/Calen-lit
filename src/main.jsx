@@ -3,22 +3,28 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import CalendarView from './components/CalendarView.jsx'
-import Login from './components/Login.jsx'
+import CreateAccount from './components/CreateAccount.jsx'
+import DailyView from './components/DailyView.jsx'
 import store from './store.js'
 import { Provider } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 const router = createBrowserRouter([
   {
     path:"/",
     element:<App/>,
     children: [{
-      path:'calendar',
-      element:<CalendarView/>
-    },
-    ],
+      path:'Calendar',
+      element:<CalendarView/>,
+    },{
+      path:'DailyView',
+      element:<DailyView/>
+  }],
   },{
-    path:'/login',
-    element: <Login/>
+    path:'/createAccount',
+    element:<CreateAccount/>
   }
 ])
 
