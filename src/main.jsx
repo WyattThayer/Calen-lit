@@ -8,6 +8,8 @@ import DailyView from './components/DailyView.jsx'
 import store from './store.js'
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios'
+import { useLoaderData } from 'react-router-dom'
 
 
 
@@ -19,8 +21,12 @@ const router = createBrowserRouter([
       path:'Calendar',
       element:<CalendarView/>,
     },{
-      path:'DailyView',
-      element:<DailyView/>
+      path:'DailyView/:date',
+      element:<DailyView/>,
+      loader: async ({params})=>{
+       const res = await axios.get(`/event/${params.date}`)
+       return {dailyView:res.data}
+      }
   }],
   },{
     path:'/createAccount',

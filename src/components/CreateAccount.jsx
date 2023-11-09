@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const CreateAccount = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +16,12 @@ const CreateAccount = () => {
     return userName.length > 0 && password.length > 0;
   };
 
-  const loginSubmit = async(e) =>{
-    e.preventDefault()
-    await axios.get('/user').then((res)=>{
-    navigate('/login')
-    })
-  }
+  const loginSubmit = async (e) => {
+    e.preventDefault();
+    await axios.get("/user").then((res) => {
+      navigate("/login");
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -69,7 +68,9 @@ const CreateAccount = () => {
       </Form>
       <div>
         <p>Already have an account?</p>
-        <Button size="sm" type='submit' onClick={(e)=>loginSubmit(e)}>Login</Button>
+        <Button size="sm" type="submit" onClick={(e) => loginSubmit(e)}>
+          Login
+        </Button>
       </div>
     </div>
   );

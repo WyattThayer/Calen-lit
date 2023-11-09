@@ -98,7 +98,6 @@ Event.init(
     },
     date: {
       type: DataTypes.DATE,
-      // allowNull: false,
     },
     place: {
       type: DataTypes.STRING,

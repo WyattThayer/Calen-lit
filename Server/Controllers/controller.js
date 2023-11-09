@@ -1,5 +1,6 @@
 
 import { User, Event, db } from "../Database/model.js";
+import { Op } from "sequelize";
 
 
 
@@ -49,12 +50,18 @@ export const handlerFunctions = {
 
   getEvents: async (req, res) => {
     const allEvents = await Event.findAll();
-    res.json(allEvents);
+    res.send(allEvents);
   },
 
   getEvent: async (req, res) => {
-    const event = await Event.findByPk(req.params.id);
-    res.json(event);
+    let date = req.params.date
+
+    const event = await Event.findAll({
+      where:{
+        date: date
+      }
+    });
+    res.send(event);
   },
 
   //* USERS

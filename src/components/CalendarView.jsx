@@ -6,56 +6,103 @@ import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
-
 const CalendarView = () => {
   const userId = useSelector((state) => state.id);
   const username = useSelector((state) => state.username);
-  console.log(userId);
+  const [date,setDate] = useState('')
 
-const navigate = useNavigate()
+    useEffect(()=>{
+        let fullDate = new Date()
+        setDate(fullDate.getFullYear()+'-'+fullDate.getMonth())
+    },[])
 
-  const dailyView = async(e) =>{
-    e.preventDefault()
-    await axios.get('/event').then((res)=>{
-    navigate('/DailyView')
-    })
-  }
+  const navigate = useNavigate();
+
+    const dailyView = async (e, i) => {
+        e.preventDefault();
+        
+        navigate(`/DailyView/${date}-${i}`);
+  };
 
   const dateArr = [];
   for (let i = 1; i <= 7; i++) {
-    dateArr.push(<td>
-        {i}<br></br>
-        <Button>addEvent</Button>
-        </td>);
+    dateArr.push(
+      <td>
+        {i}
+        <br></br>
+        <Button
+          onClick={(e) => {
+            dailyView(e, i);
+          }}
+        >
+          addEvent
+        </Button>
+      </td>
+    );
   }
   const dateArr2 = [];
   for (let i = 8; i <= 14; i++) {
-    dateArr2.push(<td>
-        {i}<br></br>
-        <Button>addEvent</Button>
-        </td>);
+    dateArr2.push(
+      <td>
+        {i}
+        <br></br>
+        <Button
+          onClick={(e) => {
+            dailyView(e, i);
+          }}
+        >
+          addEvent
+        </Button>
+      </td>
+    );
   }
   const dateArr3 = [];
   for (let i = 15; i <= 21; i++) {
-    dateArr3.push(<td>
-        {i}<br></br>
-        <Button>addEvent</Button>
-        </td>);
+    dateArr3.push(
+      <td>
+        {i}
+        <br></br>
+        <Button
+          onClick={(e) => {
+            dailyView(e, i);
+          }}
+        >
+          addEvent
+        </Button>
+      </td>
+    );
   }
   const dateArr4 = [];
   for (let i = 22; i <= 28; i++) {
-    dateArr4.push(<td>
-        {i}<br></br>
-        <Button onClick={e =>{dailyView(e)}}>addEvent</Button>
-        </td>);
+    dateArr4.push(
+      <td>
+        {i}
+        <br></br>
+        <Button
+          onClick={(e) => {
+            dailyView(e, i);
+          }}
+        >
+          addEvent
+        </Button>
+      </td>
+    );
   }
   const dateArr5 = [];
   for (let i = 29; i <= 31; i++) {
-    dateArr5.push(<td>
-        {i}<br></br>
-        <Button>addEvent</Button>
-        </td>);
+    dateArr5.push(
+      <td>
+        {i}
+        <br></br>
+        <Button
+          onClick={(e) => {
+            dailyView(e, i);
+          }}
+        >
+          addEvent
+        </Button>
+      </td>
+    );
   }
 
   return (
@@ -64,7 +111,7 @@ const navigate = useNavigate()
       <Table striped hover bordered variant="dark">
         <thead>
           <tr>
-            <th padding='15px'>Sunday</th>
+            <th padding="15px">Sunday</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
