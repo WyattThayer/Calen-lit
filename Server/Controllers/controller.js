@@ -9,14 +9,14 @@ export const handlerFunctions = {
   createEvent: async (req, res) => {
     const { desc, tag, food, costume, present } = req.body;
 
-    const newEvent = await event.create({
+    const newEvent = await Event.create({
         desc:desc,
         tag:tag,
         food:food,
         costume:costume,
         present:present
     });
-    res.send({newEvent})
+    res.send(newEvent)
   },
 
   deleteEvent: async (req, res) => {

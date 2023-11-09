@@ -10,11 +10,11 @@ const EventCard = ({event})=>{
             <CardBody>
             {tag}<br/>
             {place}<br/>
-            Food <input type='checkbox' defaultChecked={food ? true : false}/>
+            Food <input type='checkbox' disabled defaultChecked={food ? true : false}/>
             <br/>
-            Present <input type="checkbox" defaultChecked={present ? true : false}/>
+            Present <input type="checkbox" disabled defaultChecked={present ? true : false}/>
             <br/>
-            Costume <input type="checkbox" defaultChecked={costume ? true : false}/>
+            Costume <input type="checkbox" disabled defaultChecked={costume ? true : false}/>
             
             </CardBody>
         
