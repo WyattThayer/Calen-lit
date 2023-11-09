@@ -1,4 +1,4 @@
-import { Card,CardBody,CardHeader,FormCheck } from "react-bootstrap"
+import { Card, CardBody, CardHeader } from "react-bootstrap"
 
 const EventCard = ({event})=>{
     const { desc, tag, place, food, costume, present } = event

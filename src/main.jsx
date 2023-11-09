@@ -27,10 +27,10 @@ const router = createBrowserRouter([
        const res = await axios.get(`/event/${params.date}`)
        return {dailyView:res.data}
       }
+    },{
+      path:'/createAccount',
+      element:<CreateAccount/>
   }],
-  },{
-    path:'/createAccount',
-    element:<CreateAccount/>
   }
 ])
 

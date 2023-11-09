@@ -61,17 +61,11 @@ const CreateAccount = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-
+        <br/>
         <Button size="sm" type="submit" disabled={!validateForm()}>
           Create Account
         </Button>
       </Form>
-      <div>
-        <p>Already have an account?</p>
-        <Button size="sm" type="submit" onClick={(e) => loginSubmit(e)}>
-          Login
-        </Button>
-      </div>
     </div>
   );
 };
