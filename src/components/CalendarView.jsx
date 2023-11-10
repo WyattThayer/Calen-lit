@@ -35,7 +35,7 @@ const CalendarView = () => {
             dailyView(e, i);
           }}
         >
-          addEvent
+          View Day
         </Button>
       </td>
     );
@@ -51,7 +51,7 @@ const CalendarView = () => {
             dailyView(e, i);
           }}
         >
-          addEvent
+          View Day
         </Button>
       </td>
     );
@@ -67,7 +67,7 @@ const CalendarView = () => {
             dailyView(e, i);
           }}
         >
-          addEvent
+          View Day
         </Button>
       </td>
     );
@@ -83,7 +83,7 @@ const CalendarView = () => {
             dailyView(e, i);
           }}
         >
-          addEvent
+          View Day
         </Button>
       </td>
     );
@@ -99,7 +99,7 @@ const CalendarView = () => {
             dailyView(e, i);
           }}
         >
-          addEvent
+          View day
         </Button>
       </td>
     );

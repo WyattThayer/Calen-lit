@@ -2,14 +2,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import EventCard from "./Events.jsx";
 import { Form } from "react-bootstrap";
+import { redirect } from "react-router-dom";
 
 const DailyView = () => {
-  const { dailyView } = useLoaderData();
 
-  let { date } = useParams;
+    
+
+  const { dailyView } = useLoaderData();
+  let navigate = useNavigate();
+
+  let { date } = useParams();
 
   const [desc, setDesc] = useState("");
   const [tag, setTag] = useState("");
@@ -25,11 +30,13 @@ const DailyView = () => {
     console.log(event);
     return <EventCard key={event.id} event={event} />;
   });
+  
+  
 
   const addingEvent = async (event) => {
     event.preventDefault();
     await axios
-      .post("/event", { desc, tag, food, costume, present })
+      .post("/event", { desc, tag, food, costume, present, date })
       .then((res) => {
         setAddedEvents([...addedEvents, res.data]);
         setDesc("");
@@ -41,11 +48,60 @@ const DailyView = () => {
       });
   };
 
+  const backButton = () => {
+    navigate("/calendar");
+  };
+
+  const previousDay = () => {
+    
+    if(date.length > 9){
+
+        let day = date.slice(date.length - 2)
+        navigate (`/DailyView/2023-10-${day - 1}`);
+        // window.location.reload()
+    }
+    else{
+        let day = date.slice(date.length - 1)
+        navigate (`/DailyView/2023-10-${day - 1}`);
+    }
+
+    console.log(day)
+    
+  };
+
+  const nextDay = ()=>{
+    if(date.length > 9){
+
+        let day = date.slice(date.length - 2)
+        
+        navigate (`/DailyView/2023-10-${+day + 1}`);
+        
+    }
+    else{
+        let day = date.slice(date.length - 1)
+        navigate (`/DailyView/2023-10-${+day + 1}`);
+        
+    }
+  }
+
+//   useEffect(() => {
+//     // navigate(0)
+//   }, [previousDay])
+
   return (
     <div>
+      <Button onClick={(e) => backButton(e)}> Calendar</Button>
+      <br></br>
+      <br></br>
+      <Button onClick={(e) => previousDay(e)}>Previous day</Button>
+      <br></br>
+      <br></br>
+      <Button onClick={(e) => nextDay(e)}>Next Day</Button>
+      <br></br>
+      <br></br>
       <Button onClick={() => setEditing(true)}> Add New Event</Button>
 
-      {events}
+      
 
       {editing ? (
         <Form
@@ -96,6 +152,8 @@ const DailyView = () => {
       ) : (
         ""
       )}
+      
+      {events}
     </div>
   );
 };

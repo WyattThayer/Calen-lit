@@ -93,11 +93,8 @@ Event.init(
       type: DataTypes.STRING(5),
       allowNull: false,
     },
-    time: {
-      type: DataTypes.TIME,
-    },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
     },
     place: {
       type: DataTypes.STRING,

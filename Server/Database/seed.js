@@ -30,8 +30,7 @@ let events = [];
 events.push({
   desc: "it's my party",
   tag: "bday",
-  time: new Date("02/15/2024 18:00:00").toLocaleTimeString(),
-  date: new Date("02/15/2024"),
+  date: '2023-10-30',
   place: "Chuck E Cheese",
   food: true,
   costume: false,
@@ -42,8 +41,7 @@ events.push({
 events.push({
   desc: "Halloween",
   tag: "BOO",
-  time: new Date("10/31/2023 20:00:00").toLocaleTimeString(),
-  date: new Date("10/31/2023"),
+  date: "2023-10-31",
   place: "school",
   food: true,
   costume: true,
@@ -54,8 +52,7 @@ events.push({
 events.push({
   desc: "White Trash Christmas Bash",
   tag: "xmas",
-  time: new Date("12/20/2023 18:00:00").toLocaleTimeString(),
-  date: new Date("12/20/2023"),
+  date: '2023-10-29',
   place: "downtown",
   food: true,
   costume: true,
@@ -66,8 +63,7 @@ events.push({
 events.push({
   desc: "Valentines party",
   tag: "xxx",
-  time: new Date("02/14/2024 7:00:00").toLocaleTimeString(),
-  date: new Date("02/14/2024"),
+  date: '2023-10-28',
   place: "my place",
   food: false,
   costume: false,

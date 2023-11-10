@@ -7,13 +7,14 @@ import { Op } from "sequelize";
 export const handlerFunctions = {
   //* EVENTS
   createEvent: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
-
+    const { desc, tag, food, costume, present,date } = req.body;
+    
     const newEvent = await Event.create({
         desc:desc,
         tag:tag,
         food:food,
         costume:costume,
+        date: date,
         present:present
     });
     res.send(newEvent)
@@ -55,6 +56,7 @@ export const handlerFunctions = {
 
   getEvent: async (req, res) => {
     let date = req.params.date
+    console.log(date)
 
     const event = await Event.findAll({
       where:{
