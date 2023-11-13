@@ -23,17 +23,10 @@ const router = createBrowserRouter([
     },{
       path:'DailyView/:date',
       element:<DailyView/>,
-      loader: async ({params})=>{
-       const res = await axios.get(`/event/${params.date}`)
-       return {dailyView:res.data}
-      }
     },{
       path:'/createAccount',
       element:<CreateAccount/>
-  },{
-    path:'/login',
-    element:
-  }],
+  },],
   }
 ])
 

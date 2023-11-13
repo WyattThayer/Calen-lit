@@ -7,7 +7,7 @@ import { Op } from "sequelize";
 export const handlerFunctions = {
   //* EVENTS
   createEvent: async (req, res) => {
-    const { desc, tag, food, costume, present,date } = req.body;
+    const { desc, tag, food, costume, present,date,place } = req.body;
     
     const newEvent = await Event.create({
         desc:desc,
@@ -15,7 +15,8 @@ export const handlerFunctions = {
         food:food,
         costume:costume,
         date: date,
-        present:present
+        present:present,
+        place:place
     });
     res.send(newEvent)
   },
@@ -38,7 +39,7 @@ export const handlerFunctions = {
       "date",
       "time",
     ];
-    const event = await Event.findByPk(req.params.id);
+    const event = await Event.find (req.params.date);
 
     for (let key of changeableEventFields) {
       if (typeof req.body[key] !== "undefined") {

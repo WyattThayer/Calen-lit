@@ -31,6 +31,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        key={i}
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -47,6 +48,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        key={i}
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -63,6 +65,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        key={i}
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -78,7 +81,8 @@ const CalendarView = () => {
       <td>
         {i}
         <br></br>
-        <Button
+        <Button 
+        key={i}
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -95,6 +99,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        key={i}
           onClick={(e) => {
             dailyView(e, i);
           }}

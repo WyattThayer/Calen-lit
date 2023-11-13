@@ -5,13 +5,9 @@ import { Button } from "react-bootstrap";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import EventCard from "./Events.jsx";
 import { Form } from "react-bootstrap";
-import { redirect } from "react-router-dom";
 
 const DailyView = () => {
 
-    
-
-  const { dailyView } = useLoaderData();
   let navigate = useNavigate();
 
   let { date } = useParams();
@@ -22,7 +18,8 @@ const DailyView = () => {
   const [costume, setCostume] = useState(false);
   const [present, setPresent] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [addedEvents, setAddedEvents] = useState(dailyView);
+  const [addedEvents, setAddedEvents] = useState([]); 
+  const [place, setPlace] = useState('')
 
   console.log(food);
 
@@ -36,7 +33,7 @@ const DailyView = () => {
   const addingEvent = async (event) => {
     event.preventDefault();
     await axios
-      .post("/event", { desc, tag, food, costume, present, date })
+      .post("/event", { desc, tag, food, costume, present, date, place })
       .then((res) => {
         setAddedEvents([...addedEvents, res.data]);
         setDesc("");
@@ -45,6 +42,7 @@ const DailyView = () => {
         setCostume(false);
         setPresent(false);
         setEditing(false);
+        setPlace("")
       });
   };
 
@@ -84,9 +82,11 @@ const DailyView = () => {
     }
   }
 
-//   useEffect(() => {
-//     // navigate(0)
-//   }, [previousDay])
+  useEffect(() => {
+    axios.get(`/event/${date}`).then(res=>{
+      setAddedEvents(res.data)
+    })
+  }, [date])
 
   return (
     <div>
@@ -123,6 +123,12 @@ const DailyView = () => {
               type="text"
               value={tag}
               onChange={(e) => setTag(e.target.value)}
+            />
+            <Form.Label>Place</Form.Label>
+            <Form.Control
+              type="text"
+              value={place}
+              onChange={(e) => setPlace(e.target.value)}
             />
             <Form.Label>Food</Form.Label>
             <Form.Check
