@@ -61,7 +61,7 @@ const CreateAccount = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <br/>
+        <br />
         <Button size="sm" type="submit" disabled={!validateForm()}>
           Create Account
         </Button>

@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EventCard from "./Events.jsx";
 import { Form } from "react-bootstrap";
 
 const DailyView = () => {
-
   let navigate = useNavigate();
 
   let { date } = useParams();
@@ -18,22 +16,35 @@ const DailyView = () => {
   const [costume, setCostume] = useState(false);
   const [present, setPresent] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [addedEvents, setAddedEvents] = useState([]); 
-  const [place, setPlace] = useState('')
+  const [addedEvents, setAddedEvents] = useState([]);
+  const [place, setPlace] = useState("");
 
   console.log(food);
 
   const events = addedEvents.map((event) => {
     console.log(event);
-    return <EventCard key={event.id} event={event} />;
+    console.log(event.id);
+    return (
+      <EventCard
+        setAddedEvents={setAddedEvents}
+        addedEvents={addedEvents}
+        key={event.id}
+        event={event}
+      />
+    );
   });
-  
-  
 
-  const addingEvent = async (event) => {
+  const addEvent = async (event) => {
     event.preventDefault();
     await axios
-      .post("/event", { desc, tag, food, costume, present, date, place })
+      .post("/event", {
+        desc: desc,
+        tag: tag,
+        place: place,
+        present: present,
+        costume: costume,
+        food: food,
+      })
       .then((res) => {
         setAddedEvents([...addedEvents, res.data]);
         setDesc("");
@@ -42,7 +53,7 @@ const DailyView = () => {
         setCostume(false);
         setPresent(false);
         setEditing(false);
-        setPlace("")
+        setPlace("");
       });
   };
 
@@ -51,42 +62,32 @@ const DailyView = () => {
   };
 
   const previousDay = () => {
-    
-    if(date.length > 9){
-
-        let day = date.slice(date.length - 2)
-        navigate (`/DailyView/2023-10-${day - 1}`);
-        // window.location.reload()
+    if (date.length > 9) {
+      let day = date.slice(date.length - 2);
+      navigate(`/DailyView/2023-10-${day - 1}`);
+    } else {
+      let day = date.slice(date.length - 1);
+      navigate(`/DailyView/2023-10-${day - 1}`);
     }
-    else{
-        let day = date.slice(date.length - 1)
-        navigate (`/DailyView/2023-10-${day - 1}`);
-    }
-
-    console.log(day)
-    
+    // console.log(day)
   };
 
-  const nextDay = ()=>{
-    if(date.length > 9){
+  const nextDay = () => {
+    if (date.length > 9) {
+      let day = date.slice(date.length - 2);
 
-        let day = date.slice(date.length - 2)
-        
-        navigate (`/DailyView/2023-10-${+day + 1}`);
-        
+      navigate(`/DailyView/2023-10-${+day + 1}`);
+    } else {
+      let day = date.slice(date.length - 1);
+      navigate(`/DailyView/2023-10-${+day + 1}`);
     }
-    else{
-        let day = date.slice(date.length - 1)
-        navigate (`/DailyView/2023-10-${+day + 1}`);
-        
-    }
-  }
+  };
 
   useEffect(() => {
-    axios.get(`/event/${date}`).then(res=>{
-      setAddedEvents(res.data)
-    })
-  }, [date])
+    axios.get(`/event/${date}`).then((res) => {
+      setAddedEvents(res.data);
+    });
+  }, [date]);
 
   return (
     <div>
@@ -101,12 +102,17 @@ const DailyView = () => {
       <br></br>
       <Button onClick={() => setEditing(true)}> Add New Event</Button>
 
-      
-
       {editing ? (
         <Form
           onSubmit={(e) => {
-            addingEvent(e);
+            addEvent(e, {
+              desc: desc,
+              tag: tag,
+              place: place,
+              present: present,
+              costume: costume,
+              food: food,
+            });
           }}
         >
           <Form.Group size="sm" controlId="username">
@@ -158,7 +164,7 @@ const DailyView = () => {
       ) : (
         ""
       )}
-      
+
       {events}
     </div>
   );

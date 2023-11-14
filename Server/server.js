@@ -20,7 +20,7 @@ app.post("/user", handlerFunctions.createUser);
 app.get("/event", handlerFunctions.getEvents);
 app.get("/event/:date", handlerFunctions.getEvent);
 app.delete("/event/:date", handlerFunctions.deleteEvent);
-app.put("/event/:date", handlerFunctions.updateEvent);
+app.put("/event", handlerFunctions.updateEvent);
 app.post("/event", handlerFunctions.createEvent);
 
 

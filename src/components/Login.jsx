@@ -1,3 +1,3 @@
-const Login=()=>{
+const Login = () => {
 
 }

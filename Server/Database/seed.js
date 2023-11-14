@@ -30,7 +30,7 @@ let events = [];
 events.push({
   desc: "it's my party",
   tag: "bday",
-  date: '2023-10-30',
+  date: "2023-10-30",
   place: "Chuck E Cheese",
   food: true,
   costume: false,
@@ -52,7 +52,7 @@ events.push({
 events.push({
   desc: "White Trash Christmas Bash",
   tag: "xmas",
-  date: '2023-10-29',
+  date: "2023-10-29",
   place: "downtown",
   food: true,
   costume: true,
@@ -63,7 +63,7 @@ events.push({
 events.push({
   desc: "Valentines party",
   tag: "xxx",
-  date: '2023-10-28',
+  date: "2023-10-28",
   place: "my place",
   food: false,
   costume: false,

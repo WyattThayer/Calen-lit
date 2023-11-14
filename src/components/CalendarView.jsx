@@ -9,29 +9,50 @@ import { useNavigate } from "react-router-dom";
 const CalendarView = () => {
   const userId = useSelector((state) => state.id);
   const username = useSelector((state) => state.username);
-  const [date,setDate] = useState('')
+  const [date, setDate] = useState("");
+  const [addedEvents, setAddedEvents] = useState([]);
 
-    useEffect(()=>{
-        let fullDate = new Date()
-        setDate(fullDate.getFullYear()+'-'+fullDate.getMonth())
-    },[])
+  useEffect(() => {
+    let fullDate = new Date();
+    findEvent();
+    setDate(fullDate.getFullYear() + "-" + fullDate.getMonth());
+  }, []);
 
   const navigate = useNavigate();
 
-    const dailyView = async (e, i) => {
-        e.preventDefault();
-        
-        navigate(`/DailyView/${date}-${i}`);
+  const dailyView = async (e, i) => {
+    e.preventDefault();
+
+    navigate(`/DailyView/${date}-${i}`);
+  };
+
+  const findEvent = async (e, i) => {
+    await axios.get(`/event/${date}`).then((res) => {
+      setAddedEvents(res.data.tag);
+      // console.log(i)
+    });
   };
 
   const dateArr = [];
   for (let i = 1; i <= 7; i++) {
     dateArr.push(
-      <td>
+      <td key={i}>
         {i}
+        <div
+          onClick={(e) => {
+            findEvent(e, i);
+          }}
+        >
+          {/* {
+            {
+              '2023-10-23': [''],
+              '2023-10-25': []
+            }
+          } */}
+        </div>
         <br></br>
         <Button
-        key={i}
+          size="sm"
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -44,11 +65,11 @@ const CalendarView = () => {
   const dateArr2 = [];
   for (let i = 8; i <= 14; i++) {
     dateArr2.push(
-      <td>
+      <td key={i}>
         {i}
         <br></br>
         <Button
-        key={i}
+          size="sm"
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -61,11 +82,11 @@ const CalendarView = () => {
   const dateArr3 = [];
   for (let i = 15; i <= 21; i++) {
     dateArr3.push(
-      <td>
+      <td key={i}>
         {i}
         <br></br>
         <Button
-        key={i}
+          size="sm"
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -78,11 +99,11 @@ const CalendarView = () => {
   const dateArr4 = [];
   for (let i = 22; i <= 28; i++) {
     dateArr4.push(
-      <td>
+      <td key={i}>
         {i}
         <br></br>
-        <Button 
-        key={i}
+        <Button
+          size="sm"
           onClick={(e) => {
             dailyView(e, i);
           }}
@@ -95,11 +116,11 @@ const CalendarView = () => {
   const dateArr5 = [];
   for (let i = 29; i <= 31; i++) {
     dateArr5.push(
-      <td>
+      <td key={i}>
         {i}
         <br></br>
         <Button
-        key={i}
+          size="sm"
           onClick={(e) => {
             dailyView(e, i);
           }}
