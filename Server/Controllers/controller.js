@@ -19,9 +19,24 @@ export const handlerFunctions = {
   },
 
   deleteEvent: async (req, res) => {
-    const { desc, tag, food, costume, present } = req.body;
+    const { id, date } = req.params;
 
-    const newEvent = await Event.destroy({});
+    console.log(id);
+
+    try {
+      const event = await Event.findByPk(id);
+
+      if (!event) {
+        return res.status(404).send("Event not found");
+      }
+
+      await event.destroy();
+
+      res.send("event destroyed");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      res.status(500).send("internal server error");
+    }
   },
 
   updateEvent: async (req, res) => {

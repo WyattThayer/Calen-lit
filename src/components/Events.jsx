@@ -23,7 +23,7 @@ const EventCard = ({ event, setAddedEvents }) => {
     // console.log(editing)
   };
 
-  const addingEvent = async (event) => {
+  const editingEvent = async (event) => {
     event.preventDefault();
     await axios
       .put("/event", {
@@ -42,69 +42,85 @@ const EventCard = ({ event, setAddedEvents }) => {
       });
   };
 
+  const deleteEvent = async (event) => {
+    await axios.delete(`/event/` + id).then((res) => {
+      setEditing(false);
+      window.location.reload(true);
+    });
+  };
+
   return (
     <div>
       {editing ? (
-        <Form
-          onSubmit={(e) => {
-            addingEvent(e);
-          }}
-        >
-          <Form.Group size="sm" controlId="username">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              value={descState}
-              onChange={(e) => setDesc(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group size="sm" controlId="password">
-            <Form.Label>Tag</Form.Label>
-            <Form.Control
-              type="text"
-              value={tagState}
-              onChange={(e) => setTag(e.target.value)}
-            />
-            <Form.Label>Place</Form.Label>
-            <Form.Control
-              type="text"
-              value={placeState}
-              onChange={(e) => setPlace(e.target.value)}
-            />
-            <Form.Label>Food</Form.Label>
-            <Form.Check
-              checked={foodState}
-              value={foodState}
-              onChange={() => {
-                setFood(!food);
-              }}
-            />
-            <Form.Label>Costume</Form.Label>
-            <Form.Check
-              checked={costumeState}
-              value={costumeState}
-              onChange={() => {
-                setCostume(!costume);
-              }}
-            />
-            <Form.Label>Present</Form.Label>
-            <Form.Check
-              checked={presentState}
-              value={presentState}
-              onChange={() => {
-                setPresent(!present);
-              }}
-            />
-          </Form.Group>
-          <br />
-          <Button type="submit">Add Event</Button>
-        </Form>
+        <div>
+          <Form
+            onSubmit={(e) => {
+              editingEvent(e);
+            }}
+          >
+            <Form.Group size="sm" controlId="username">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                value={descState}
+                onChange={(e) => setDesc(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="sm" controlId="password">
+              <Form.Label>Tag</Form.Label>
+              <Form.Control
+                type="text"
+                value={tagState}
+                onChange={(e) => setTag(e.target.value)}
+              />
+              <Form.Label>Place</Form.Label>
+              <Form.Control
+                type="text"
+                value={placeState}
+                onChange={(e) => setPlace(e.target.value)}
+              />
+              <Form.Label>Food</Form.Label>
+              <Form.Check
+                checked={foodState}
+                value={foodState}
+                onChange={() => {
+                  setFood(!food);
+                }}
+              />
+              <Form.Label>Costume</Form.Label>
+              <Form.Check
+                checked={costumeState}
+                value={costumeState}
+                onChange={() => {
+                  setCostume(!costume);
+                }}
+              />
+              <Form.Label>Present</Form.Label>
+              <Form.Check
+                checked={presentState}
+                value={presentState}
+                onChange={() => {
+                  setPresent(!present);
+                }}
+              />
+            </Form.Group>
+            <br />
+            <Button type="submit">Update Event</Button>
+          </Form>
+          <br></br>
+          <Button
+            onClick={(e) => {
+              deleteEvent(e);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
       ) : (
         <Card className="text-center">
           <CardHeader>
             {desc}
             <Button onClick={(e) => edit(e)}>Edit</Button>
-            <Button>Delete</Button>
           </CardHeader>
           <CardBody>
             {tag}
