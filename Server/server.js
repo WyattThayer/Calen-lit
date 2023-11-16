@@ -23,8 +23,6 @@ app.delete("/event/:id", handlerFunctions.deleteEvent);
 app.put("/event", handlerFunctions.updateEvent);
 app.post("/event", handlerFunctions.createEvent);
 
-
-
 //opening the server
 ViteExpress.listen(app, 6969, () =>
   console.log(`listening on http://localhost:6969`)

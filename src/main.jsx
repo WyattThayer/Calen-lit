@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CalendarView from "./components/CalendarView.jsx";
 import CreateAccount from "./components/CreateAccount.jsx";
 import DailyView from "./components/DailyView.jsx";
@@ -31,13 +28,12 @@ const router = createBrowserRouter([
         element: <CreateAccount />,
       },
       {
-        path:"/login",
-        element:<Login/>
-      }
+        path: "/login",
+        element: <Login />,
+      },
     ],
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

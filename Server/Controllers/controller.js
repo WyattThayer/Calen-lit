@@ -133,26 +133,24 @@ export const handlerFunctions = {
 
   getUser: async (req, res) => {
     const { username, password } = req.body;
-    console.log(username)
     try {
-      const logged = await User.scope('withPassword').findOne({
+      const logged = await User.scope("withPassword").findOne({
         where: {
           username: username,
         },
       });
-      
-      console.log(logged.password)
 
       if (!logged) {
         return res.status(404).send("user not found");
       }
 
-      const auth = bcryptjs.compareSync(password,logged.password)
+      const auth = bcryptjs.compareSync(password, logged.password);
 
-      
+      if (!auth) {
+        return res.status(404).send("password doesn't match");
+      }
 
       res.send(logged);
-
     } catch (error) {
       console.log("Error logging in", error);
       res.status(500).send("internal error");

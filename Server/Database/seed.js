@@ -1,5 +1,4 @@
 import { User, Event, db } from "./model.js";
-import bcryptjs from "bcryptjs";
 
 await db.sync({ force: true });
 

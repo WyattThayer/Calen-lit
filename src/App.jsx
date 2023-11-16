@@ -1,7 +1,4 @@
-import { useState } from "react";
-import CalendarView from "./components/CalendarView.jsx";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import DailyView from "./components/DailyView.jsx";
+import { Outlet } from "react-router-dom";
 import MainPage from "./components/MainPage.jsx";
 import { Navbar } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -15,11 +12,16 @@ function App() {
     navigate("/createAccount");
   };
 
+  const login = (e) => {
+    e.preventDefault();
+    navigate("/login");
+  };
+
   return (
     <>
       <Navbar bg="primary">
         CALEN-LIT
-        <Button>Login</Button>
+        <Button onClick={(e) => login(e)}>Login</Button>
         <br></br>
         <Button
           onClick={(e) => {

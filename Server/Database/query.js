@@ -1,11 +1,7 @@
-import {User,db} from "./model.js"
+import { User, db } from "./model.js";
 
-const user = await User.scope('withPassword').findOne({
-//     scope:{
-//         status:'withPassword'
-//     }
-})
+const user = await User.scope("withPassword").findOne();
 
-console.log(user)
+console.log(user);
 
-await db.close()
+await db.close();
