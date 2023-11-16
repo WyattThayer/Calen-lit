@@ -1,5 +1,5 @@
 import { User, Event, db } from "../Database/model.js";
-import { Op } from "sequelize";
+import bcryptjs from "bcryptjs";
 
 export const handlerFunctions = {
   //* EVENTS
@@ -84,6 +84,7 @@ export const handlerFunctions = {
         date: date,
       },
     });
+
     res.send(event);
   },
 
@@ -95,7 +96,9 @@ export const handlerFunctions = {
       username: userName,
       password: password,
     });
+
     console.log(newUser);
+
     res.send({ userId: newUser.id });
   },
 
@@ -114,7 +117,9 @@ export const handlerFunctions = {
         user[key] = req.body[key];
       }
     }
+
     const result = await user.save();
+
     res.send(result);
   },
 
@@ -122,11 +127,35 @@ export const handlerFunctions = {
     const allUsers = await User.findAll({
       attributes: { exclude: ["password"] },
     });
+
     res.send(allUsers);
   },
 
   getUser: async (req, res) => {
-    const user = await User.findByPk(req.params.id);
-    res.send(user);
+    const { username, password } = req.body;
+    console.log(username)
+    try {
+      const logged = await User.scope('withPassword').findOne({
+        where: {
+          username: username,
+        },
+      });
+      
+      console.log(logged.password)
+
+      if (!logged) {
+        return res.status(404).send("user not found");
+      }
+
+      const auth = bcryptjs.compareSync(password,logged.password)
+
+      
+
+      res.send(logged);
+
+    } catch (error) {
+      console.log("Error logging in", error);
+      res.status(500).send("internal error");
+    }
   },
 };

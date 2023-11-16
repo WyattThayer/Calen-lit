@@ -16,13 +16,6 @@ const CreateAccount = () => {
     return userName.length > 0 && password.length > 0;
   };
 
-  const loginSubmit = async (e) => {
-    e.preventDefault();
-    await axios.get("/user").then((res) => {
-      navigate("/login");
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios.post("/user", { userName, password }).then((res) => {

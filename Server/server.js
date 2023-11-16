@@ -12,7 +12,7 @@ app.use(express.json());
 
 //Routes
 app.get("/user", handlerFunctions.getUsers);
-app.get("/user/:id", handlerFunctions.getUser);
+app.post("/login", handlerFunctions.getUser);
 app.delete("/user/:id", handlerFunctions.deleteUser);
 app.put("/user/:id", handlerFunctions.updateUser);
 app.post("/user", handlerFunctions.createUser);
