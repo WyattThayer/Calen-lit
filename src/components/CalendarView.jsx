@@ -37,18 +37,6 @@ const CalendarView = () => {
     dateArr.push(
       <td key={i}>
         {i}
-        <div
-          onClick={(e) => {
-            findEvent(e, i);
-          }}
-        >
-          {/* {
-            {
-              '2023-10-23': [''],
-              '2023-10-25': []
-            }
-          } */}
-        </div>
         <br></br>
         <Button
           size="sm"

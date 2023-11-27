@@ -97,8 +97,6 @@ export const handlerFunctions = {
       password: password,
     });
 
-    console.log(newUser);
-
     res.send({ userId: newUser.id });
   },
 
