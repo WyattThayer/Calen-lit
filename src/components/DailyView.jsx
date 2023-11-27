@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import { Button, ButtonGroup, ButtonToolbar } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import EventCard from "./Events.jsx";
 import { Form } from "react-bootstrap";
@@ -44,6 +44,7 @@ const DailyView = () => {
         present: present,
         costume: costume,
         food: food,
+        date,
       })
       .then((res) => {
         setAddedEvents([...addedEvents, res.data]);
@@ -91,17 +92,23 @@ const DailyView = () => {
 
   return (
     <div>
-      <Button onClick={(e) => backButton(e)}> Calendar</Button>
-      <br></br>
-      <br></br>
-      <Button onClick={(e) => previousDay(e)}>Previous day</Button>
-      <br></br>
-      <br></br>
-      <Button onClick={(e) => nextDay(e)}>Next Day</Button>
-      <br></br>
-      <br></br>
-      <Button onClick={() => setEditing(true)}> Add New Event</Button>
+      <Button size="lg" onClick={(e) => backButton(e)}>
+        {" "}
+        Calendar
+      </Button>
+      <br />
+      <br />
 
+      <ButtonToolbar className="justify-content-between">
+        <Button onClick={(e) => previousDay(e)}>Previous day</Button>
+
+        <Button onClick={(e) => nextDay(e)}>Next Day</Button>
+      </ButtonToolbar>
+      <br />
+      <div className="d-grid gap-2">
+        <Button onClick={() => setEditing(true)}> Add New Event</Button>
+      </div>
+      <br></br>
       {editing ? (
         <Form
           onSubmit={(e) => {

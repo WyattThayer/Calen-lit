@@ -19,8 +19,8 @@ function App() {
 
   return (
     <>
-      <Navbar bg="primary">
-        CALEN-LIT
+      <Navbar bg="primary" className="justify-content">
+        <Navbar.Brand>CALEN-LIT</Navbar.Brand>
         <Button onClick={(e) => login(e)}>Login</Button>
         <br></br>
         <Button

@@ -5,6 +5,7 @@ export const handlerFunctions = {
   //* EVENTS
   createEvent: async (req, res) => {
     const { desc, tag, food, costume, present, date, place } = req.body;
+    console.log(date);
 
     const newEvent = await Event.create({
       desc: desc,

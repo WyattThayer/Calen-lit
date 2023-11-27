@@ -118,10 +118,7 @@ const EventCard = ({ event, setAddedEvents }) => {
         </div>
       ) : (
         <Card className="text-center">
-          <CardHeader>
-            {desc}
-            <Button onClick={(e) => edit(e)}>Edit</Button>
-          </CardHeader>
+          <CardHeader>{desc}</CardHeader>
           <CardBody>
             {tag}
             <br />
@@ -147,6 +144,9 @@ const EventCard = ({ event, setAddedEvents }) => {
               disabled
               defaultChecked={costume ? true : false}
             />
+            <Button className="text-right" onClick={(e) => edit(e)}>
+              Edit
+            </Button>
           </CardBody>
         </Card>
       )}
