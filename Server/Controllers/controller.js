@@ -4,8 +4,8 @@ import bcryptjs from "bcryptjs";
 export const handlerFunctions = {
   // EVENTS
   createEvent: async (req, res) => {
-    const { desc, tag, food, costume, present, date, place } = req.body;
-    console.log(date);
+    const { desc, tag, food, costume, present, date, place, userId } = req.body;
+    console.log(userId);
 
     const newEvent = await Event.create({
       desc: desc,
@@ -15,6 +15,7 @@ export const handlerFunctions = {
       date: date,
       present: present,
       place: place,
+      userId:userId
     });
     res.send(newEvent);
   },
@@ -78,21 +79,23 @@ export const handlerFunctions = {
 
   getEvent: async (req, res) => {
     let date = req.params.date;
-    // let userId = req.user.id
-    // console.log(date);
+    // console.log(req)
+    let userId = req.query.userId
+    console.log(userId)
+    console.log(date);
 
     const event = await Event.findAll({
       where: {
         date: date,
       },
-      // include:[
-      //   {
-      //     model:User,
-      //     where:{
-      //       id: userId
-      //     }
-      //   }
-      // ]
+      include:[
+        {
+          model:User,
+          where:{
+            id: userId
+          }
+        }
+      ]
     });
 
     res.send(event);

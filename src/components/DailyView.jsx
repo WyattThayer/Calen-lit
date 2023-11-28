@@ -4,6 +4,7 @@ import { Button, ButtonGroup, ButtonToolbar } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import EventCard from "./Events.jsx";
 import { Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const DailyView = () => {
   let navigate = useNavigate();
@@ -18,7 +19,8 @@ const DailyView = () => {
   const [editing, setEditing] = useState(false);
   const [addedEvents, setAddedEvents] = useState([]);
   const [place, setPlace] = useState("");
-
+  const userId = useSelector((state)=>state.userId)
+  console.log(userId)
   console.log(food);
 
   const events = addedEvents.map((event) => {
@@ -45,6 +47,7 @@ const DailyView = () => {
         costume: costume,
         food: food,
         date,
+        userId,
       })
       .then((res) => {
         setAddedEvents([...addedEvents, res.data]);
@@ -83,9 +86,9 @@ const DailyView = () => {
       navigate(`/DailyView/2023-10-${+day + 1}`);
     }
   };
-
+console.log()
   useEffect(() => {
-    axios.get(`/event/${date}`).then((res) => {
+    axios.get(`/event/${date}?userId=${userId}`).then((res) => {
       setAddedEvents(res.data);
     });
   }, [date]);

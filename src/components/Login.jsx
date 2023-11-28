@@ -21,10 +21,10 @@ const Login = () => {
         username,
         password,
       });
-      // console.log("🚀 ~ file: Login.jsx:17 ~ handleSubmit ~ res:", res);
+      console.log("🚀 ~ file: Login.jsx:17 ~ handleSubmit ~ res:", data);
       dispatch({
         type: "LOGIN",
-        payload: { username: data?.username, userId: data?.userId },
+        payload: { username: data?.username, userId: data?.id },
       });
 
       navigate("/Calendar");
