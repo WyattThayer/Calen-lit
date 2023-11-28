@@ -92,23 +92,25 @@ const DailyView = () => {
 
   return (
     <div>
-      <Button size="lg" onClick={(e) => backButton(e)}>
-        {" "}
+      <Button variant="primary" size="lg" onClick={(e) => backButton(e)}>
         Calendar
       </Button>
+
       <br />
       <br />
 
       <ButtonToolbar className="justify-content-between">
-        <Button onClick={(e) => previousDay(e)}>Previous day</Button>
-
-        <Button onClick={(e) => nextDay(e)}>Next Day</Button>
+        <Button variant="info" onClick={(e) => previousDay(e)}>Previous day</Button>
+        <div>{date}</div>
+        <Button variant="info" onClick={(e) => nextDay(e)}>Next Day</Button>
       </ButtonToolbar>
+
       <br />
-      <div className="d-grid gap-2">
-        <Button onClick={() => setEditing(true)}> Add New Event</Button>
-      </div>
-      <br></br>
+
+      
+
+      <br/>
+
       {editing ? (
         <Form
           onSubmit={(e) => {
@@ -169,9 +171,11 @@ const DailyView = () => {
           <Button type="submit">Add Event</Button>
         </Form>
       ) : (
-        ""
+        <div className="d-grid gap-2">
+        <Button variant="success" onClick={() => setEditing(true)}> Add New Event</Button>
+      </div>
       )}
-
+        <br/>
       {events}
     </div>
   );

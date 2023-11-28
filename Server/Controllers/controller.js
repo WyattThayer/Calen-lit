@@ -2,7 +2,7 @@ import { User, Event, db } from "../Database/model.js";
 import bcryptjs from "bcryptjs";
 
 export const handlerFunctions = {
-  //* EVENTS
+  // EVENTS
   createEvent: async (req, res) => {
     const { desc, tag, food, costume, present, date, place } = req.body;
     console.log(date);
@@ -78,18 +78,27 @@ export const handlerFunctions = {
 
   getEvent: async (req, res) => {
     let date = req.params.date;
-    console.log(date);
+    // let userId = req.user.id
+    // console.log(date);
 
     const event = await Event.findAll({
       where: {
         date: date,
       },
+      // include:[
+      //   {
+      //     model:User,
+      //     where:{
+      //       id: userId
+      //     }
+      //   }
+      // ]
     });
 
     res.send(event);
   },
 
-  //* USERS
+  // USERS
   createUser: async (req, res) => {
     const { userName, password } = req.body;
 

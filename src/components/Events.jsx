@@ -105,10 +105,11 @@ const EventCard = ({ event, setAddedEvents }) => {
               />
             </Form.Group>
             <br />
-            <Button type="submit">Update Event</Button>
+            <Button variant="success" type="submit">Update Event</Button>
           </Form>
           <br></br>
           <Button
+          variant="danger"
             onClick={(e) => {
               deleteEvent(e);
             }}
@@ -144,7 +145,8 @@ const EventCard = ({ event, setAddedEvents }) => {
               disabled
               defaultChecked={costume ? true : false}
             />
-            <Button className="text-right" onClick={(e) => edit(e)}>
+            <br/>
+            <Button variant="success" className="text-right" onClick={(e) => edit(e)}>
               Edit
             </Button>
           </CardBody>

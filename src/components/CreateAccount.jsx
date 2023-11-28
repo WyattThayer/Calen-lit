@@ -55,7 +55,7 @@ const CreateAccount = () => {
           />
         </Form.Group>
         <br />
-        <Button size="sm" type="submit" disabled={!validateForm()}>
+        <Button variant="dark" size="sm" type="submit" disabled={!validateForm()}>
           Create Account
         </Button>
       </Form>

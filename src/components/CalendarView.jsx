@@ -25,6 +25,12 @@ const CalendarView = () => {
     navigate(`/DailyView/${date}-${i}`);
   };
 
+  const dailyViewNov = async (e, i) => {
+    e.preventDefault();
+
+    navigate(`/DailyView/2023-11-${i}`);
+  };
+
   const findEvent = async (e, i) => {
     await axios.get(`/event/${date}`).then((res) => {
       setAddedEvents(res.data.tag);
@@ -39,6 +45,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        variant="info"
           size="sm"
           onClick={(e) => {
             dailyView(e, i);
@@ -56,6 +63,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        variant="info"
           size="sm"
           onClick={(e) => {
             dailyView(e, i);
@@ -73,6 +81,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        variant="info"
           size="sm"
           onClick={(e) => {
             dailyView(e, i);
@@ -90,6 +99,7 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        variant="info"
           size="sm"
           onClick={(e) => {
             dailyView(e, i);
@@ -107,9 +117,28 @@ const CalendarView = () => {
         {i}
         <br></br>
         <Button
+        variant="info"
           size="sm"
           onClick={(e) => {
             dailyView(e, i);
+          }}
+        >
+          View day
+        </Button>
+      </td>
+    );
+  }
+  const dateArr6 = [];
+  for (let i = 1; i <= 4; i++) {
+    dateArr6.push(
+      <td key={i}>
+        {i}
+        <br></br>
+        <Button
+          size="sm"
+          variant='secondary'
+          onClick={(e) => {
+            dailyViewNov(e, i);
           }}
         >
           View day
@@ -121,7 +150,7 @@ const CalendarView = () => {
   return (
     <div>
       <h2 className="text-center">October</h2>
-      <Table striped hover bordered variant="dark">
+      <Table  hover bordered variant="dark">
         <thead>
           <tr>
             <th padding="15px">Sunday</th>
@@ -138,7 +167,7 @@ const CalendarView = () => {
           <tr>{dateArr2}</tr>
           <tr>{dateArr3}</tr>
           <tr>{dateArr4}</tr>
-          <tr>{dateArr5}</tr>
+          <tr>{dateArr5}{dateArr6}</tr>
         </tbody>
       </Table>
     </div>

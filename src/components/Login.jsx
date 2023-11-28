@@ -41,7 +41,7 @@ const Login = () => {
           />
         </Form.Group>
         <br />
-        <Button size="sm" type="submit" disabled={!validateForm()}>
+        <Button variant="dark" size="sm" type="submit" disabled={!validateForm()}>
           Login
         </Button>
       </Form>

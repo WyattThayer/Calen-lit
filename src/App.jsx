@@ -19,11 +19,11 @@ function App() {
 
   return (
     <>
-      <Navbar bg="primary" className="justify-content">
+      <Navbar bg="dark" data-bs-theme="dark" className="justify-content">
         <Navbar.Brand>CALEN-LIT</Navbar.Brand>
-        <Button onClick={(e) => login(e)}>Login</Button>
+        <Button variant="primary" onClick={(e) => login(e)}>Login</Button>
         <br></br>
-        <Button
+        <Button variant="success"
           onClick={(e) => {
             newAccount(e);
           }}
