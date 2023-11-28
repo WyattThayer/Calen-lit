@@ -121,6 +121,7 @@ const DailyView = () => {
               present: present,
               costume: costume,
               food: food,
+              setAddedEvents
             });
           }}
         >

@@ -42,10 +42,10 @@ const EventCard = ({ event, setAddedEvents }) => {
       });
   };
 
-  const deleteEvent = async (event) => {
+  const deleteEvent = async () => {
     await axios.delete(`/event/` + id).then((res) => {
       setEditing(false);
-      window.location.reload(true);
+      setAddedEvents(currentEvents => currentEvents.filter(event => event.id !== id))
     });
   };
 

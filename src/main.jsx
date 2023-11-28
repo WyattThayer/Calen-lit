@@ -9,6 +9,7 @@ import store from "./store.js";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login.jsx";
+import { PrivateRoutes } from "./components/PrivateRoutes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,22 +17,28 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "Calendar",
-        element: <CalendarView />,
-      },
-      {
-        path: "DailyView/:date",
-        element: <DailyView />,
-      },
-      {
-        path: "/createAccount",
-        element: <CreateAccount />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
+        path: "*",
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: "Calendar",
+            element: <CalendarView />,
+          },
+          {
+            path: "DailyView/:date",
+            element: <DailyView />,
+          },
+        ],
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/createAccount",
+    element: <CreateAccount />,
   },
 ]);
 

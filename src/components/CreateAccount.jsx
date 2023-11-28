@@ -6,43 +6,43 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreateAccount = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const validateForm = () => {
-    return userName.length > 0 && password.length > 0;
+    return username.length > 0 && password.length > 0;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await axios.post("/user", { userName, password }).then((res) => {
-      dispatch({
-        type: "SET_USERNAME",
-        payload: userName,
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/user", {
+        username,
+        password,
       });
+      console.log("🚀 ~ file: Login.jsx:17 ~ handleSubmit ~ res:", data);
       dispatch({
-        type: "SET_PASSWORD",
-        payload: password,
+        type: "LOGIN",
+        payload: { username: data?.username, userId: data?.userId },
       });
-      dispatch({
-        type: "SET_ID",
-        payload: res.data.userId,
-      });
-      navigate("/calendar");
-    });
+
+      navigate("/Calendar");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <div className="Account">
-      <Form onSubmit={(e) => handleSubmit(e)}>
+    <div className="Account container-sm">
+      <Form onSubmit={(e) => handleSubmit(e)} className="w-50">
         <Form.Group size="sm" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
-            value={userName}
+            value={username}
             onChange={(e) => setUserName(e.target.value)}
           />
         </Form.Group>
@@ -55,7 +55,12 @@ const CreateAccount = () => {
           />
         </Form.Group>
         <br />
-        <Button variant="dark" size="sm" type="submit" disabled={!validateForm()}>
+        <Button
+          variant="dark"
+          size="sm"
+          type="submit"
+          disabled={!validateForm()}
+        >
           Create Account
         </Button>
       </Form>

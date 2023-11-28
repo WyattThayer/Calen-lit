@@ -100,14 +100,14 @@ export const handlerFunctions = {
 
   // USERS
   createUser: async (req, res) => {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
 
     const newUser = await User.create({
-      username: userName,
+      username: username,
       password: password,
     });
 
-    res.send({ userId: newUser.id });
+    res.send({ userId: newUser.id, username });
   },
 
   deleteUser: async (req, res) => {
@@ -140,8 +140,8 @@ export const handlerFunctions = {
   },
 
   getUser: async (req, res) => {
-    const { username, password } = req.body;
     try {
+      const { username, password } = req.body;
       const logged = await User.scope("withPassword").findOne({
         where: {
           username: username,
@@ -158,7 +158,9 @@ export const handlerFunctions = {
         return res.status(404).send("password doesn't match");
       }
 
-      res.send(logged);
+      const { password: _, ...user } = logged.dataValues;
+
+      res.send(user);
     } catch (error) {
       console.log("Error logging in", error);
       res.status(500).send("internal error");

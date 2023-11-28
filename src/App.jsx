@@ -2,34 +2,33 @@ import { Outlet } from "react-router-dom";
 import MainPage from "./components/MainPage.jsx";
 import { Navbar } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
 
 function App() {
-  const navigate = useNavigate();
 
-  const newAccount = (event) => {
-    event.preventDefault();
-    navigate("/createAccount");
-  };
+  const dispatch =  useDispatch()
+  const isAuth = useSelector((state)=>state.isAuth)
+  
 
-  const login = (e) => {
-    e.preventDefault();
-    navigate("/login");
-  };
 
   return (
     <>
       <Navbar bg="dark" data-bs-theme="dark" className="justify-content">
         <Navbar.Brand>CALEN-LIT</Navbar.Brand>
-        <Button variant="primary" onClick={(e) => login(e)}>Login</Button>
-        <br></br>
-        <Button variant="success"
-          onClick={(e) => {
-            newAccount(e);
-          }}
-        >
+        {isAuth ?<Button variant="primary" onClick={()=>dispatch({type:'LOGOUT'})}>Logout</Button> :(
+        <>
+        <Link to="/login">
+          <Button variant="primary" >Login</Button>
+        </Link>
+                <Link to="/createAccount">
+        <Button variant="success">
           Create account
         </Button>
+        </Link>
+        </>
+        )}
+
       </Navbar>
       <MainPage />
       <Outlet />
