@@ -21,7 +21,7 @@ const Login = () => {
         username,
         password,
       });
-      console.log("🚀 ~ file: Login.jsx:17 ~ handleSubmit ~ res:", data);
+      //* console.log("🚀 ~ file: Login.jsx:17 ~ handleSubmit ~ res:", data);
       dispatch({
         type: "LOGIN",
         payload: { username: data?.username, userId: data?.id },

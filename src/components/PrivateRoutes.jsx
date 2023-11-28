@@ -4,10 +4,7 @@ import { useSelector } from "react-redux";
 
 export const PrivateRoutes = () => {
   const isAuth = useSelector((state) => state.isAuth);
-  console.log(
-    "🚀 ~ file: PrivateRoutes.jsx:7 ~ PrivateRoutes ~ isAuth:",
-    isAuth
-  );
+  
   const location = useLocation();
 
   if (isAuth === undefined) {

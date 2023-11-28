@@ -2,13 +2,19 @@ import express from "express";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
 import { handlerFunctions } from "./Controllers/controller.js";
+import session from 'express-session'
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(express.json());
+app.use(session({
+  secret: 'gettinjiggywitit',
+  saveUninitialized: false,
+  resave: false
+}))
 
 //Routes
 app.get("/user", handlerFunctions.getUsers);

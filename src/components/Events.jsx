@@ -70,6 +70,7 @@ const EventCard = ({ event, setAddedEvents }) => {
               <Form.Label>Tag</Form.Label>
               <Form.Control
                 type="text"
+                maxLength={5}
                 value={tagState}
                 onChange={(e) => setTag(e.target.value)}
               />

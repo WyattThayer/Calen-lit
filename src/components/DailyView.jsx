@@ -68,10 +68,10 @@ const DailyView = () => {
   const previousDay = () => {
     if (date.length > 9) {
       let day = date.slice(date.length - 2);
-      navigate(`/DailyView/2023-10-${day - 1}`);
+      navigate(`/DailyView/2023-12-${day - 1}`);
     } else {
       let day = date.slice(date.length - 1);
-      navigate(`/DailyView/2023-10-${day - 1}`);
+      navigate(`/DailyView/2023-12-${day - 1}`);
     }
     // console.log(day)
   };
@@ -80,10 +80,10 @@ const DailyView = () => {
     if (date.length > 9) {
       let day = date.slice(date.length - 2);
 
-      navigate(`/DailyView/2023-10-${+day + 1}`);
+      navigate(`/DailyView/2023-12-${+day + 1}`);
     } else {
       let day = date.slice(date.length - 1);
-      navigate(`/DailyView/2023-10-${+day + 1}`);
+      navigate(`/DailyView/2023-12-${+day + 1}`);
     }
   };
 console.log()
@@ -128,7 +128,7 @@ console.log()
             });
           }}
         >
-          <Form.Group size="sm" controlId="username">
+          <Form.Group size="sm">
             <Form.Label>Description</Form.Label>
             <Form.Control
               type="text"
@@ -136,10 +136,11 @@ console.log()
               onChange={(e) => setDesc(e.target.value)}
             />
           </Form.Group>
-          <Form.Group size="sm" controlId="password">
+          <Form.Group size="sm">
             <Form.Label>Tag</Form.Label>
             <Form.Control
               type="text"
+              maxLength={5}
               value={tag}
               onChange={(e) => setTag(e.target.value)}
             />
