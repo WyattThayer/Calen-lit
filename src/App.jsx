@@ -4,6 +4,7 @@ import { Navbar } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
+import './app.css'
 
 function App() {
 

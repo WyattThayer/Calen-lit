@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import "./login.css";
 
 const Login = () => {
   const [username, setUserName] = useState("");
@@ -40,9 +41,12 @@ const Login = () => {
   };
 
   return (
-    <div className="Account container-sm d-flex">
+    <div className="Account container-sm d-flex card mt-5">
+      <div className="welcome">Welcome back to Calen-lit</div>
+      <br />
+      <br />
       <Form onSubmit={(e) => handleSubmit(e)} className="w-50">
-        <Form.Group size="sm" controlId="username">
+        <Form.Group className="mb-3" size="sm" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -50,6 +54,7 @@ const Login = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group size="sm" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -58,8 +63,11 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
         <br />
+
         {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : ""}
+
         <Button
           variant="dark"
           size="sm"

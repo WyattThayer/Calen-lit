@@ -50,8 +50,10 @@ export const handlerFunctions = {
       presentState,
       id,
       placeState,
+      userId
     } = req.body;
-    console.log(id);
+    // let userId = req.query.userId
+    // console.log(userId);
     const event = await Event.findByPk(id);
     let originalDate = event.date;
 
@@ -68,6 +70,14 @@ export const handlerFunctions = {
       where: {
         date: originalDate,
       },
+      include:[
+        {
+          model:User,
+          where:{
+            id: userId
+          }
+        }
+      ]
     });
     res.send(events);
   },

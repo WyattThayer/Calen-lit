@@ -36,9 +36,12 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="Account container-sm">
+    <div className="Account container-sm d-flex card mt-5">
+      <div className="welcome">Welcome to Calen-Lit</div>
+      <br/>
+      <br/>
       <Form onSubmit={(e) => handleSubmit(e)} className="w-50">
-        <Form.Group size="sm" controlId="username">
+        <Form.Group className="mb-3" size="sm" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -46,6 +49,7 @@ const CreateAccount = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group size="sm" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -54,7 +58,9 @@ const CreateAccount = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
         <br />
+        
         <Button
           variant="dark"
           size="sm"

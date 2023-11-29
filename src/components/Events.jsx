@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const EventCard = ({ event, setAddedEvents }) => {
   const { desc, tag, place, food, costume, present, id } = event;
@@ -17,6 +18,8 @@ const EventCard = ({ event, setAddedEvents }) => {
   const [costumeState, setCostume] = useState(costume);
   const [presentState, setPresent] = useState(present);
   const [placeState, setPlace] = useState(place);
+  const userId = useSelector((state)=>state.userId)
+
 
   const edit = () => {
     setEditing(!editing);
@@ -35,9 +38,16 @@ const EventCard = ({ event, setAddedEvents }) => {
         date,
         placeState,
         id,
+        userId,
       })
       .then((res) => {
         setAddedEvents(res.data);
+        // setAddedEvents((currentEvents) =>
+        //   currentEvents.map((currentEvent) =>{
+        //     if(currentEvent.id === id){
+        //       return res.data
+        //     } return res.data
+        //   }));
         setEditing(false);
       });
   };
@@ -45,7 +55,9 @@ const EventCard = ({ event, setAddedEvents }) => {
   const deleteEvent = async () => {
     await axios.delete(`/event/` + id).then((res) => {
       setEditing(false);
-      setAddedEvents(currentEvents => currentEvents.filter(event => event.id !== id))
+      setAddedEvents((currentEvents) =>
+        currentEvents.filter((event) => event.id !== id)
+      );
     });
   };
 
@@ -106,11 +118,13 @@ const EventCard = ({ event, setAddedEvents }) => {
               />
             </Form.Group>
             <br />
-            <Button variant="success" type="submit">Update Event</Button>
+            <Button variant="success" type="submit">
+              Update Event
+            </Button>
           </Form>
           <br></br>
           <Button
-          variant="danger"
+            variant="danger"
             onClick={(e) => {
               deleteEvent(e);
             }}
@@ -146,8 +160,12 @@ const EventCard = ({ event, setAddedEvents }) => {
               disabled
               defaultChecked={costume ? true : false}
             />
-            <br/>
-            <Button variant="success" className="text-right" onClick={(e) => edit(e)}>
+            <br />
+            <Button
+              variant="success"
+              className="text-right"
+              onClick={(e) => edit(e)}
+            >
               Edit
             </Button>
           </CardBody>
